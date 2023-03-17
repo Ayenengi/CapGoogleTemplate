@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+        <h1></h1>
+
+        <form method=post>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.sleep_date.label }} <br>
+                {{ form.sleep_date() }}
+                <!--List the errors for this field-->
+                {% for error in form.sleep_date.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.hours.label }} <br>
+                {{ form.hours(size=6) }}
+                <!--List the errors for this field-->
+                {% for error in form.hours.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.rating.label }} <br>
+                {{ form.rating() }}
+                <!--List the errors for this field-->
+                {% for error in form.rating.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{form.submit()}}
+            </p>
+        </form>
+        
+{% endblock %}

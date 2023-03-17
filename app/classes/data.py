@@ -35,6 +35,12 @@ class User(UserMixin, Document):
     meta = {
         'ordering': ['lname','fname']
     }
+
+class Sleep(Document):
+    sleeper = ReferenceField('User',reverse_delete_rule=CASCADE)
+    rating = IntField()
+    hours = IntField()
+    sleep_date = DateTimeField()
     
 class Blog(Document):
     author = ReferenceField('User',reverse_delete_rule=CASCADE) 

@@ -25,31 +25,6 @@ like the navbar. -->
 <body>
   <!--This is where the navbar is placed.  The navbar code is in the includes folder -->
     {% include 'includes/_navbar.html' %}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #bebebe;">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="base.html">Capstone Project</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown link
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="aboutus.html">About Us(change later)</a></li>
-                <li><a class="dropdown-item" href="blank.html"> blank template(chnage later)</a></li>
-                <li><a class="dropdown-item" href="blog.html">blog(change later)</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
       <!-- Flask has a messages feature called "Flash" where you can pass messages to the template from the code.  This is where 
         those messages are displayed -->
       {% with messages = get_flashed_messages() %}
