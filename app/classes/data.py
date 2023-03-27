@@ -41,6 +41,10 @@ class Sleep(Document):
     rating = IntField()
     hours = IntField()
     sleep_date = DateTimeField()
+
+    meta = {
+        'ordering': ['sleep_date']
+    }
     
 class Blog(Document):
     author = ReferenceField('User',reverse_delete_rule=CASCADE) 
