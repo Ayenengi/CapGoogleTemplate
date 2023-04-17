@@ -9,6 +9,10 @@ import datetime as dt
 import matplotlib.pyplot as plt
 import numpy as np
 
+@app.route('/overview')
+def overview():
+    return render_template('overview.html')
+
 @app.route('/sleep/new', methods=['GET', 'POST'])
 @login_required
 
