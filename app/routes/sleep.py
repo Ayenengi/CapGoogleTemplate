@@ -6,8 +6,8 @@ from app.classes.data import Sleep
 from app.classes.forms import SleepForm
 from flask_login import login_required
 import datetime as dt
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 
 @app.route('/overview')
 def overview():
