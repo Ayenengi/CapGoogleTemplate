@@ -15,18 +15,23 @@ def overview():
 
 @app.route('/sleep/new', methods=['GET', 'POST'])
 @login_required
-
 def sleepNew():
     form = SleepForm()
     if form.validate_on_submit():
         newSleep = Sleep(
             sleeper = current_user,
             rating = form.rating.data,
-            hours = form.hours.data,
             sleep_date = form.sleep_date.data
         )
         newSleep.save()
         return redirect(url_for("sleep",sleepId=newSleep.id))
+    
+    if form.submit.data:
+        if form.rating.data == 'None':
+            form.rating.errors = ['Required']
+        if form.feel.data == 'None':
+            form.feel.errors = ['Required']
+        
     return render_template("sleepform.html",form=form)
 
 @app.route('/sleep/edit/<sleepId>', methods=['GET', 'POST'])

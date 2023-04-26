@@ -39,8 +39,12 @@ class User(UserMixin, Document):
 class Sleep(Document):
     sleeper = ReferenceField('User',reverse_delete_rule=CASCADE)
     rating = IntField()
+    feel = IntField()
+    start = DateTimeField()
+    end = DateTimeField()
     hours = IntField()
     sleep_date = DateTimeField()
+    minstosleep = IntField()
 
     meta = {
         'ordering': ['sleep_date']
