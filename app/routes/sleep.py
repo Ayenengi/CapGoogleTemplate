@@ -18,10 +18,18 @@ def overview():
 def sleepNew():
     form = SleepForm()
     if form.validate_on_submit():
+        # startDT = dt.datetime.combine(form.sleep_date.data, form.starttime.data)
+        # endDT = dt.datetime.combine(form.sleep_date.data, form.endtime.data)
+        # hours = startDT - endDT
+        # flash(hours.min)
         newSleep = Sleep(
             sleeper = current_user,
             rating = form.rating.data,
-            sleep_date = form.sleep_date.data
+            sleep_date = form.sleep_date.data,
+            start = str(form.starttime.data),
+            end = str(form.endtime.data),
+            feel = form.feel.data,
+            minstosleep = form.minstosleep.data,
         )
         newSleep.save()
         return redirect(url_for("sleep",sleepId=newSleep.id))
