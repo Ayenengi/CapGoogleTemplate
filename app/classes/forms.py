@@ -16,7 +16,7 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Post')
 
 class SleepForm(FlaskForm):
-    rating = SelectField("Rating", choices=[(None,'---'),(1,1),(2,2),(3,3),(4,4),(5,5)], validators=[DataRequired()])
+    rating = SelectField("How would you rate your sleep", choices=[(None,'---'),(1,1),(2,2),(3,3),(4,4),(5,5)], validators=[DataRequired()])
     starttime = TimeField("Start Time")   
     endtime = TimeField("End Time")   
     feel = SelectField("How did you feel when you woke up?", choices=[(None,'---'),(1,1),(2,2),(3,3),(4,4),(5,5)], validators=[DataRequired()])
