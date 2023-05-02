@@ -2,12 +2,38 @@ from app import app
 import mongoengine.errors
 from flask import render_template, flash, redirect, url_for
 from flask_login import current_user
-from app.classes.data import Sleep
-from app.classes.forms import SleepForm
+from app.classes.data import Sleep, User
+from app.classes.forms import SleepForm, ConsentForm
 from flask_login import login_required
 import datetime as dt
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #import numpy as np
+
+@app.route('/consent', methods=['GET', 'POST'])
+def consent():
+    form = ConsentForm()
+    if form.validate_on_submit():
+        if form.consent.data == "True":
+            consent = True
+        else:
+            consent = False
+        current_user.update(
+            consent = consent,
+            adult_fname = form.adult_fname.data,
+            adult_lname = form.adult_lname.data,
+            adult_email = form.adult_email.data
+        )
+        return redirect(url_for('myProfile'))
+    # if current_user.consent 
+    #     form.consent.process_data((True,"Yes"))
+    # else:
+    #     form.consent.process_data((False,"No"))
+    form.consent.process_data(current_user.consent)
+    form.adult_fname.data = current_user.adult_fname
+    form.adult_lname.data = current_user.adult_lname
+    form.adult_email.data = current_user.adult_email
+    return render_template("consentform.html", form=form)
+
 
 @app.route('/overview')
 def overview():
