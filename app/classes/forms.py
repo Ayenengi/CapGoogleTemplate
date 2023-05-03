@@ -19,7 +19,7 @@ class ConsentForm(FlaskForm):
     adult_fname = StringField('First Name',validators=[DataRequired()])
     adult_lname = StringField('Last Name',validators=[DataRequired()])
     adult_email = EmailField('Email',validators=[Email()])
-    consent = RadioField('Consent', choices=[(True,"True"),(False,"False")])
+    consent = RadioField('Do you want your parents or teachers to see your sleep data/graph', choices=[(True,"True"),(False,"False")])
     submit = SubmitField('Submit')
 
 class SleepForm(FlaskForm):
