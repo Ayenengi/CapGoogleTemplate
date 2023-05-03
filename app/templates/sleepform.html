@@ -22,6 +22,14 @@
                 {% endfor %}
             </p>
             <p>
+                {{ form.wake_date.label }} <br>
+                {{ form.wake_date() }}
+                <!--List the errors for this field-->
+                {% for error in form.wake_date.errors %}
+                   <br> <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
                 {{ form.endtime.label }} <br>
                 {{ form.endtime(size=6) }}
                 <!--List the errors for this field-->

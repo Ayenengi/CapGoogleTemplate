@@ -27,7 +27,8 @@ class SleepForm(FlaskForm):
     starttime = TimeField("Start Time")   
     endtime = TimeField("End Time")   
     feel = SelectField("How did you feel when you woke up?", choices=[(None,'---'),(1,1),(2,2),(3,3),(4,4),(5,5)], validators=[DataRequired()])
-    sleep_date = DateField("Date")
+    sleep_date = DateField("Date you went to sleep")
+    wake_date = DateField("Date you woke up")
     minstosleep = IntegerField("How many minutes did it take you to fall asleep?", validators=[NumberRange(min=0,max=180, message="Enter a number between 0 and 180.")])
     submit = SubmitField("Submit")
 

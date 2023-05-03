@@ -13,7 +13,7 @@ from setuptools import SetuptoolsDeprecationWarning
 from app import app
 from flask import flash
 from flask_login import UserMixin
-from mongoengine import FileField, EmailField, StringField, IntField, ReferenceField, DateTimeField, BooleanField, CASCADE
+from mongoengine import FileField, EmailField, StringField, IntField, ReferenceField, DateTimeField, BooleanField, FloatField, CASCADE
 from flask_mongoengine import Document
 import datetime as dt
 import jwt
@@ -44,10 +44,10 @@ class Sleep(Document):
     sleeper = ReferenceField('User',reverse_delete_rule=CASCADE)
     rating = IntField()
     feel = IntField()
-    start = StringField()
-    end = StringField()
-    hours = IntField()
+    start = DateTimeField()
+    end = DateTimeField()
     sleep_date = DateTimeField()
+    hours = FloatField()
     minstosleep = IntField()
 
     meta = {

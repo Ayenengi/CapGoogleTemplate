@@ -17,13 +17,14 @@
         {% if sleep.sleeper.image %}
             <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(sleep.sleeper.image.read())}}">
         {% endif %}
+            Hours: {{sleep.hours}} <br>
             Start: {{sleep.start}} <br>
             End: {{sleep.end}} <br>
             Rating: {{sleep.rating}} <br>
             How I felt: {{sleep.feel}} <br>
             Minsutes to sleep: {{sleep.minstosleep}}
-{%else%}
-No Sleep Here
+{% else %}
+    No Sleep Here
 {% endif %}
 
 {% endblock %}

@@ -24,10 +24,7 @@ def consent():
             adult_email = form.adult_email.data
         )
         return redirect(url_for('myProfile'))
-    # if current_user.consent 
-    #     form.consent.process_data((True,"Yes"))
-    # else:
-    #     form.consent.process_data((False,"No"))
+
     form.consent.process_data(current_user.consent)
     form.adult_fname.data = current_user.adult_fname
     form.adult_lname.data = current_user.adult_lname
@@ -44,16 +41,16 @@ def overview():
 def sleepNew():
     form = SleepForm()
     if form.validate_on_submit():
-        # startDT = dt.datetime.combine(form.sleep_date.data, form.starttime.data)
-        # endDT = dt.datetime.combine(form.sleep_date.data, form.endtime.data)
-        # hours = startDT - endDT
-        # flash(hours.min)
+        startDT = dt.datetime.combine(form.sleep_date.data, form.starttime.data)
+        endDT = dt.datetime.combine(form.wake_date.data, form.endtime.data)
+        diff = startDT - endDT
+        hours = diff.seconds/60/60
         newSleep = Sleep(
+            hours = hours,
             sleeper = current_user,
             rating = form.rating.data,
-            sleep_date = form.sleep_date.data,
-            start = str(form.starttime.data),
-            end = str(form.endtime.data),
+            start = startDT,
+            end = endDT,
             feel = form.feel.data,
             minstosleep = form.minstosleep.data,
         )
@@ -80,17 +77,28 @@ def sleepEdit(sleepId):
         return redirect(url_for('sleeps'))
     
     if form.validate_on_submit():
+        startDT = dt.datetime.combine(form.sleep_date.data, form.starttime.data)
+        endDT = dt.datetime.combine(form.wake_date.data, form.endtime.data)
+        diff = endDT - startDT
+        hours = diff.seconds/60/60
+
         editSleep.update(
+            hours = hours,
             rating = form.rating.data,
-            hours = form.hours.data,
-            sleep_date = form.sleep_date.data
+            start = startDT,
+            end = endDT,
+            feel = form.feel.data,
+            minstosleep = form.minstosleep.data
         )
-        editSleep.save()
         return redirect(url_for("sleep",sleepId=editSleep.id))
     
-    form.hours.data = editSleep.hours
+    form.sleep_date.process_data(editSleep.start.date())
+    form.starttime.process_data(editSleep.start.time())
+    form.wake_date.process_data(editSleep.end.date())
+    form.endtime.process_data(editSleep.end.time())
     form.rating.process_data(editSleep.rating)
-    form.sleep_date.data = editSleep.sleep_date
+    form.feel.process_data(editSleep.feel)
+    form.minstosleep.data = editSleep.minstosleep
     return render_template("sleepform.html",form=form)
 
 @app.route('/sleep/<sleepId>')
@@ -129,7 +137,7 @@ def sleepgraph():
     colors = []
     for sleep in sleeps:
         hours.append(sleep.hours)
-        dates.append(sleep.sleep_date)   
+        dates.append(sleep.start.date())   
         if sleep.rating >=4:
             colors.append('green')
         elif sleep.rating == 3:

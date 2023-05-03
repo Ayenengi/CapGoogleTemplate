@@ -17,14 +17,12 @@
         <div class="row border-bottom">
 
         <div clas="col">
-            {% if sleep.sleeper == current_user %}
                 <a data-toggle="tooltip" data-placement="top" title="Delete Sleep" href="/sleep/delete/{{sleep.id}}">
                     <img width="20" class="bottom-image" src="/static/delete.png">
                 </a>
                 <a data-toggle="tooltip" data-placement="top" title="Edit Sleep" href="/sleep/edit/{{sleep.id}}">
                     <img width="20" class="bottom-image" src="/static/edit.png">
                 </a>
-            {% endif %}
         </div>
 
             <div class="col-2">
@@ -41,6 +39,12 @@
                 <h3>Sleeper</h3>
                 {% endif %}
                 {{sleep.sleeper.fname}} {{sleep.sleeper.lname}}
+            </div>
+            <div class="col">
+                {% if loop.index == 1 %}
+                    <h3>Hours</h3>
+                {% endif %}
+                {{sleep.hours}}
             </div>
             <div class="col">
                 {% if loop.index == 1 %}
