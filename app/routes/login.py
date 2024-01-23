@@ -126,6 +126,7 @@ def callback():
     # Get user from DB or create new user
     try:
         thisUser=User.objects.get(email=gmail)
+    # if the user does not exist, create them and make sure they are ousd.org
     except mongoengine.errors.DoesNotExist:
         if userinfo_response.json().get("hd") == "ousd.org":
             thisUser = User(
